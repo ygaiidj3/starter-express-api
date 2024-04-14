@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+require('dotenv').config()
 
 const app = express();
 const port = 3000;
@@ -8,6 +9,7 @@ let token = process.env.API_TOKEN
 let group_id = process.env.GROUP_ID
 
 api_url = api_url.replace("$API_TOKEN$", token)
+console.log(api_url);
 
 function read_client_info(req, res, next) {
     const message = {
