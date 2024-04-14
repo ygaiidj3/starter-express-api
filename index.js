@@ -4,7 +4,15 @@ const axios = require('axios');
 const app = express();
 const port = 3000;
 
+function read_client_info(req, res, next) {
+    console.log(req.headers);
+    console.log(req.ip)
+    console.log("=============")
+    next()
+}
+
 app.use(express.json());
+app.use(read_client_info)
 
 app.get('/', (req, res) => {
     res.send("You found me :D");
