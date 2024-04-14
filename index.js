@@ -3,11 +3,21 @@ const axios = require('axios');
 
 const app = express();
 const port = 3000;
+let api_url = process.env.API_URL
+let token = process.env.API_TOKEN
+let group_id = process.env.GROUP_ID
+
+api_url = api_url.replace("$API_TOKEN$", token)
 
 function read_client_info(req, res, next) {
-    console.log(req.headers);
-    console.log(req.ip)
-    console.log("=============")
+    const message = {
+        "chat_id": group_id,
+        "text": "```json\n"+JSON.stringify(req.headers, null, 2)+"\n```",
+        "parse_mode": "Markdown",
+    }
+    axios.post(api_url, {
+        data: message
+    })
     next()
 }
 
